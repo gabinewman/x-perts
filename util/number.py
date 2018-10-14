@@ -35,6 +35,14 @@ class Number:
             copy.add_item(n["quantity"], n["unit"])
         return copy
 
+    def clean(self): #Make adds together multiples of the same units and removes 0s
+        place=0
+        for n in self.numbers:
+            if n["quantity"] == 0:
+                self.numbers.pop(place)
+            place+=1
+
+
     def __str__(self):
         ret=""
         for n in self.numbers:
@@ -71,9 +79,8 @@ class Number:
 
 n1=Number(4, "x")
 n1.append_number(4)
-n2=Number(4)
-n2.append_number(4, "y")
-n1.add(n2)
-#print(n1.numbers)
-#print(n2.numbers)
-print(n1)
+n2=Number(5)
+n2.append_number(0, "x")
+p = n1.multiply(n2)
+p.clean()
+print(p)
