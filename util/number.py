@@ -5,9 +5,9 @@ class Number:
         self.numbers = []
         if quantity!=None and unit != None:
             self.add_item(quantity,unit)
-        elif quantity == None:
+        elif unit != None:
             self.add_item(1,unit)
-        elif unit == None:
+        elif quantity != None:
             self.add_item(quantity,"")
     #Containing and manually setting numbers
     def set_number(self, quantity=1, unit=""):
@@ -24,6 +24,11 @@ class Number:
         return l
     def remove_index(self, index):
         self.numbers.pop(index)
+    def copy_number(self):
+        copy = Number()
+        for n in self.numbers:
+            copy.numbers.append(n)
+        return copy
     def __str__(self):
         ret=""
         for n in self.numbers:
@@ -33,18 +38,25 @@ class Number:
         return ""
     #Arithmetic operations on numbers
     def add(self, number):
-        units=self.list_units()
+        copy = self.copy_number()
+        units=copy.list_units()
         for n in number.numbers:
             if n["unit"] not in units:
-                self.numbers.append(n)
+                copy.numbers.append(n)
             else:
-                for toadd in self.numbers:
+                for toadd in copy.numbers:
                     if toadd["unit"] == n["unit"]:
                         toadd["quantity"]+=n["quantity"]
+        return copy
+    def subtract(self, number):
+        negative=Number()
+        for n in number.numbers:
+            negative.append_number(n["quantity"] * -1, n["unit"])
+        return self.add(negative)
 
 n1=Number(4, "x")
 n1.append_number(4)
-n2=Number(2)
+n2=Number(8)
 n2.append_number(7, "y")
-n1.add(n2)
+n1.subtract(n2)
 print(n1)
