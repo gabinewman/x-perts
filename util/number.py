@@ -32,7 +32,7 @@ class Number:
     def copy_number(self):
         copy = Number()
         for n in self.numbers:
-            copy.numbers.append(n)
+            copy.add_item(n["quantity"], n["unit"])
         return copy
 
     def __str__(self):
@@ -63,18 +63,17 @@ class Number:
         return self.add(negative)
 
     def multiply(self, number):
-        copy = self.copy_number()
+        copy = Number()
         for n in self.numbers:
             for n2 in number.numbers:
                 copy.append_number(n["quantity"] * n2["quantity"], n["unit"] + n2["unit"])
-                print (copy.numbers[-1])
         return copy
 
 n1=Number(4, "x")
 n1.append_number(4)
 n2=Number(4)
 n2.append_number(4, "y")
-#n1.subtract(n2)
+n1.add(n2)
 #print(n1.numbers)
 #print(n2.numbers)
-print(n1.multiply(n2))
+print(n1)
