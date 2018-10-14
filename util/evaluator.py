@@ -81,7 +81,3 @@ def convent_to_Number(f):
 
 def is_operator(x):
     return x in "+-*/"
-#
-stringthing = "3 + 2 * 72"
-t = [3, "+", 2]
-print(parse_stack(t))
