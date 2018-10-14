@@ -76,5 +76,6 @@ def process_operator():
 def is_operator(x):
     return x in "+-*/"
 #
-t = [3.0, "+", 2.0, "+", 5.0]
+stringthing = "3 + 2 * 72"
+t = [3, "+", 2]
 print(parse_stack(t))
